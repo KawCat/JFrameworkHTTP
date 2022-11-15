@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 public class Server {
+    private final String serverName = "JFrameworkHTTP/1.0.0";
     private final int port;
     private ServerSocket socket;
 
@@ -32,12 +33,14 @@ public class Server {
             socket = new ServerSocket(port);
             System.out.println("Server listening on port " + port);
             while(true){
-                new ClientThread(socket.accept()).start();
+                new ClientThread(this, socket.accept()).start();
             }
         }catch(IOException ioe){
             ioe.printStackTrace();
         }
     }
 
-
+    public String getServerName(){
+        return serverName;
+    }
 }

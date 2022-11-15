@@ -3,6 +3,8 @@ package kawcat.jframeworkhttp.classes.objects;
 import kawcat.jframeworkhttp.enums.Methods;
 import kawcat.jframeworkhttp.interfaces.RequestHandler;
 
+import java.io.File;
+
 /**
  * Used for the `java.util.Collections` on `kawcat.jframework.classes.Router`
  */
@@ -10,6 +12,7 @@ public class RouteEntry {
     private final Methods method;
     private final String URI;
     private final RequestHandler handler;
+    private final File file;
 
     /**
      * Route entry constructor
@@ -21,6 +24,14 @@ public class RouteEntry {
         this.method = method;
         this.URI = URI;
         this.handler = handler;
+        this.file = null;
+    }
+
+    public RouteEntry(Methods method, String URI, File file) {
+        this.method = method;
+        this.URI = URI;
+        this.handler = null;
+        this.file = file;
     }
 
     /**
@@ -45,5 +56,9 @@ public class RouteEntry {
      */
     public RequestHandler getHandler() {
         return handler;
+    }
+
+    public File getFile() {
+        return file;
     }
 }

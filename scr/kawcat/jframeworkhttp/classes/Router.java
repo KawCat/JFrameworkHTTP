@@ -4,6 +4,7 @@ import kawcat.jframeworkhttp.classes.objects.RouteEntry;
 import kawcat.jframeworkhttp.enums.Methods;
 import kawcat.jframeworkhttp.interfaces.RequestHandler;
 
+import java.io.File;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -21,6 +22,10 @@ public class Router {
         return routes.add(new RouteEntry(method, URI, handler));
     }
 
+    public static boolean register(Methods method, String URI, File file){
+        return routes.add(new RouteEntry(method, URI, file));
+    }
+
     /**
      * Unregister a class implementing `kawcat.jframework.interfaces.RequestHandler`
      * @param handler `kawcat.jframework.interfaces.RequestHandler` Class implementing the interface
@@ -30,6 +35,16 @@ public class Router {
         RouteEntry[] entries = routes.toArray(new RouteEntry[routes.size()]);
         for(RouteEntry entry : entries){
             if(entry.getHandler().equals(handler)){
+                return routes.remove(entry);
+            }
+        }
+        return false;
+    }
+
+    public static boolean unregister(File file){
+        RouteEntry[] entries = routes.toArray(new RouteEntry[routes.size()]);
+        for(RouteEntry entry : entries){
+            if(entry.getFile().equals(file)){
                 return routes.remove(entry);
             }
         }
