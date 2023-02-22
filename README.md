@@ -37,13 +37,13 @@ public class Index implements RequestHandler{
         String html = "Hello world!";
 
         // The response HTTP version is the same as the request HTTP version
-        // This respond is marked with the HTTP status code "200 OK"
+        // This response is marked with the HTTP status code "200 OK"
         // If we want to input this argument with an integer value you can use
         //StatusCodes.getEnumByInt(200)
         // And finally we convert the HTML into bytes
         Response res = new Response(req.getVersion(), StatusCodes.OK, html.getBytes());
         
-        // If the return value is false the framework will automatically unregister
+        // If the return value is null the framework will automatically unregister
         // this class and send the default 404 Not Found page & status code
         return res;
     }
